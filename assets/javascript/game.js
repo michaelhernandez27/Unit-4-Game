@@ -34,4 +34,60 @@ var startGame = function () {
     winCount = 0;
     lossCount = 0;
 
+    targetScore = getRandom(19, 120);
+
+    crystal.ruby.value = getRandom(1, 12);
+    crystal.amethyst.value = getRandom(1, 12);
+    crystal.emerald.value = getRandom(1, 12);
+    crystal.diamond.value = getRandom(1, 12);
+
+    $("#targScore").html(targetScore)
+    $("#curScore").html(currentScore)
+
 }
+
+var chgVal = function (crystal) {
+    currentScore = currentScore + crystal.value;
+    $("#curScore").html(currentScore);
+
+    checkWin();
+};
+
+var checkWin = function () {
+
+    if (currentScore > targetScore) {
+        alert("Sorry, try again!");
+
+        lossCount++;
+        $("#lossCount").html(lossCount);
+        startGame();
+
+    }
+
+    else if (currentScore == targetScore) {
+        alert("YOU WIN!!!");
+
+        winCount++;
+        $("#winCount").html(winCount);
+
+        startGame();
+    }
+}
+
+startGame();
+
+$("#ruby").click(function () {
+    chgVal(crystal.ruby);
+});
+
+$("#emerald").click(function () {
+    chgVal(crystal.emerald);
+});
+
+$("#diamond").click(function () {
+    chgVal(crystal.diamond);
+});
+
+$("#amethyst").click(function () {
+    chgVal(crystal.amethyst);
+});
